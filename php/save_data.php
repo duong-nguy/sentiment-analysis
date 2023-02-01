@@ -1,0 +1,28 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    append_data($_POST, "data.csv");
+}
+function append_data($data, $file_name)
+{
+
+    if (!file_exists($file_name)) {
+        $header = "";
+        foreach ($data as $key => $value) {
+            $header = $header . "" . "$key,";
+        }
+        $header = substr($header, 0, -1);
+        $header = $header . "" . "\n";
+        file_put_contents($file_name, $header);
+    }
+    $line = "";
+    foreach ($data as $value) {
+        $line = $line . "" . "$value,";
+    }
+    $line = substr($line, 0, -1);
+    $line = $line . "" . "\n";
+    $file = fopen($file_name, "a");
+    fwrite($file, $line);
+    fclose($file);
+}
+
+?>
