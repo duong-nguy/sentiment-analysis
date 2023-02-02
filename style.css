@@ -1,0 +1,15 @@
+table tr:hover {
+    background-color: #beb9b9;
+}
+table tr:hover.shy-btn{
+    visibility: visible;
+}
+table tr.shy-btn{
+    visibility: hidden;
+}
+.delete-btn{
+    background-color: red;
+}
+.edit-btn{
+    background-color: green;
+}

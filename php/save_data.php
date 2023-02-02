@@ -6,7 +6,7 @@ function append_data($data, $file_name)
 {
 
     if (!file_exists($file_name)) {
-        $header = "";
+        $header = "ID,";
         foreach ($data as $key => $value) {
             $header = $header . "" . "$key,";
         }
@@ -14,7 +14,7 @@ function append_data($data, $file_name)
         $header = $header . "" . "\n";
         file_put_contents($file_name, $header);
     }
-    $line = "";
+    $line = "" . generate_base32_id().",";
     foreach ($data as $value) {
         $line = $line . "" . "$value,";
     }
@@ -23,6 +23,15 @@ function append_data($data, $file_name)
     $file = fopen($file_name, "a");
     fwrite($file, $line);
     fclose($file);
+}
+function generate_base32_id() {
+    $base32_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUV";
+    $id = "";
+    for ($i = 0; $i < 5; $i++) {
+        $rand_index = mt_rand(0, 31);
+        $id .= $base32_chars[$rand_index];
+    }
+    return $id;
 }
 
 ?>

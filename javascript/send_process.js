@@ -30,6 +30,5 @@ function submit_form() {
     xhr.setRequestHeader("Content-Type",
         "application/x-www-form-urlencoded");
     form_data = extract_data();
-    console.log(form_data);
     xhr.send(form_data);
 }
