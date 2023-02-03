@@ -14,7 +14,7 @@ function append_data($data, $file_name)
         $header = $header . "" . "\n";
         file_put_contents($file_name, $header);
     }
-    $line = "" . generate_base32_id().",";
+    $line = "" . generate_base64_id() . ",";
     foreach ($data as $value) {
         $line = $line . "" . "$value,";
     }
@@ -24,12 +24,14 @@ function append_data($data, $file_name)
     fwrite($file, $line);
     fclose($file);
 }
-function generate_base32_id() {
-    $base32_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUV";
+function generate_base64_id()
+{
+    $base64_chars = 
+    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-";
     $id = "";
     for ($i = 0; $i < 5; $i++) {
-        $rand_index = mt_rand(0, 31);
-        $id .= $base32_chars[$rand_index];
+        $rand_index = mt_rand(0, 63);
+        $id .= $base64_chars[$rand_index];
     }
     return $id;
 }

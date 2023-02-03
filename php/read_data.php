@@ -1,5 +1,9 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    if (isset($_POST["delete"]))
+        delete_row("data.csv", $_POST["delete"]);
+    if (isset($_POST["edit"]))
+        edit_row("data.csv", $_POST["edit"], $_POST["new-row"]);
     $data_json = read_csv(
         "data.csv",
         $_POST["off-set"],
@@ -8,20 +12,37 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     header("Content-Type: application/json");
     echo $data_json;
 }
-function delete_line($file, $id)
+function edit_row($file_name, $id, $new_row)
 {
-    $file = fopen($file, "r");
+    $file = fopen($file_name, "r");
     $tem_file = fopen("temp.csv", "a");
     while ($row = fgetcsv($file)) {
-        if ($row[0] === $id)
+        if ($row[0] === $id) {
+            fwrite($tem_file, $new_row."\n");
             continue;
-        fwrite($tem_file, $row);
+        }
+        fputcsv($tem_file, $row);
 
     }
     fclose($file);
     fclose($tem_file);
-    unlink($file);
-    rename("temp.csv", $file);
+    unlink($file_name);
+    rename("temp.csv", $file_name);
+}
+function delete_row($file_name, $id)
+{
+    $file = fopen($file_name, "r");
+    $tem_file = fopen("temp.csv", "a");
+    while ($row = fgetcsv($file)) {
+        if ($row[0] === $id)
+            continue;
+        fputcsv($tem_file, $row);
+
+    }
+    fclose($file);
+    fclose($tem_file);
+    unlink($file_name);
+    rename("temp.csv", $file_name);
 }
 function read_csv(
     string $file,
