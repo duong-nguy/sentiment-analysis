@@ -4,6 +4,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         delete_row("data.csv", $_POST["delete"]);
     if (isset($_POST["edit"]))
         edit_row("data.csv", $_POST["edit"], $_POST["new-row"]);
+    if (isset($_POST["sentiment"])) {
+            exec("python ../python/sentiment.py data.csv");
+    }
     $data_json = read_csv(
         "data.csv",
         $_POST["off-set"],
@@ -14,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 }
 function edit_row($file_name, $id, $new_row)
 {
+    if (!check_data($new_row))
+        return;
     $file = fopen($file_name, "r");
     $tem_file = fopen("temp.csv", "a");
     while ($row = fgetcsv($file)) {
@@ -28,6 +33,16 @@ function edit_row($file_name, $id, $new_row)
     fclose($tem_file);
     unlink($file_name);
     rename("temp.csv", $file_name);
+}
+function check_data($data){
+    $data = explode(",", $data);
+    foreach ($data as $key => $value) {
+        if ($value === "")
+            return false;
+        if ($key === 2 && !is_numeric($value))
+            return false;
+    }
+    return true;
 }
 function delete_row($file_name, $id)
 {

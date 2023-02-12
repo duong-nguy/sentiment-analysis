@@ -4,25 +4,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 function append_data($data, $file_name)
 {
-
+    if (!check_data($data))
+        return;
     if (!file_exists($file_name)) {
         $header = "ID,";
         foreach ($data as $key => $value) {
-            $header = $header . "" . "$key,";
+            $header = $header . "$key,";
         }
-        $header = substr($header, 0, -1);
-        $header = $header . "" . "\n";
+        $header = $header . "sentiment";
+        $header = $header . "\n";
         file_put_contents($file_name, $header);
     }
-    $line = "" . generate_base64_id() . ",";
+    $line = generate_base64_id() . ",";
     foreach ($data as $value) {
-        $line = $line . "" . "$value,";
+        $line = $line . "$value,";
     }
-    $line = substr($line, 0, -1);
-    $line = $line . "" . "\n";
+    $line = $line . "NaN";
+    $line = $line . "\n";
     $file = fopen($file_name, "a");
     fwrite($file, $line);
     fclose($file);
+}
+function check_data($data){
+    foreach ($data as $key => $value) {
+        if ($value == "")
+            return false;
+        if (!is_numeric($value) && $key == "age")
+            return false;
+    }
+    return true;
 }
 function generate_base64_id()
 {

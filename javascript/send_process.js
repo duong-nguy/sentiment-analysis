@@ -1,5 +1,5 @@
 var button = document.getElementById("send-request");
-button.addEventListener("click",submit_form);
+button.addEventListener("click", submit_form);
 function validate_data() {
     let form_ctmr_fbck = document.getElementById("customer-feedback");
     for (const element of form_ctmr_fbck.elements) {
@@ -14,11 +14,11 @@ function validate_data() {
 }
 function extract_data() {
     let form_ctmr_fbck = document.getElementById("customer-feedback");
-    let data= "";
+    let data = "";
     for (const element of form_ctmr_fbck.elements) {
         if (element.type == "button") continue;
-        data+= data == "" ? `${element.name}=` : `&${element.name}=`;
-        data+= encodeURIComponent(element.value);
+        data += data == "" ? `${element.name}=` : `&${element.name}=`;
+        data += encodeURIComponent(element.value);
     }
     return data;
 }

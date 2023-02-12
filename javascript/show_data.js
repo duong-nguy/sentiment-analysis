@@ -8,6 +8,13 @@ document.getElementById("next-btn").addEventListener("click", () => {
     off_set += N_ROWS;
     request_data();
 });
+document.getElementById("sentiment-btn").addEventListener("click", () => {
+    request =
+        "off-set=" + encodeURIComponent(off_set) +
+        "&n-rows=" + encodeURIComponent(N_ROWS) +
+        "&sentiment=true";
+    send_request(request);
+})
 function request_data() {
     request = "off-set=" + encodeURIComponent(off_set) +
         "&n-rows=" + encodeURIComponent(N_ROWS);
@@ -95,6 +102,7 @@ function end_of_file(responseText) {
     return false;
 }
 function create_table(responseText) {
+    document.getElementById("feedback-msg").innerHTML = "";
     if (end_of_file(responseText)) return;
     data = JSON.parse(responseText);
     table = document.getElementById("table");
