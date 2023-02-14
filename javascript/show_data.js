@@ -8,13 +8,6 @@ document.getElementById("next-btn").addEventListener("click", () => {
     off_set += N_ROWS;
     request_data();
 });
-document.getElementById("sentiment-btn").addEventListener("click", () => {
-    request =
-        "off-set=" + encodeURIComponent(off_set) +
-        "&n-rows=" + encodeURIComponent(N_ROWS) +
-        "&sentiment=true";
-    send_request(request);
-})
 function request_data() {
     request = "off-set=" + encodeURIComponent(off_set) +
         "&n-rows=" + encodeURIComponent(N_ROWS);
@@ -42,7 +35,8 @@ function request_edit_row() {
                 `${cell.id} is empty`;
             return;
         };
-        if (row.cells[index].id == "age" && !Number.isFinite(cell_value)) {
+        if (row.cells[index].id == "age" && !Number.isFinite(Number(cell_value))) {
+            console.log(!Number.isFinite(cell_value));
             document.getElementById("feedback-msg").innerHTML =
                 `${cell.id} can only not be number`;
             return;
@@ -76,9 +70,10 @@ function create_edit_fields() {
     id = row.cells[0].innerHTML;
     for (let index = 1; index < row.cells.length - 2; index++) {
         cell = row.cells[index];
-        cell.innerHTML = "";
         text_area = document.createElement("textarea");
         text_area.id = cell.id;
+        text_area.value = cell.innerHTML;
+        cell.innerHTML = "";
         cell.appendChild(text_area);
     }
     row.cells[row.cells.length - 1].innerHTML = "";

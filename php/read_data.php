@@ -4,9 +4,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         delete_row("data.csv", $_POST["delete"]);
     if (isset($_POST["edit"]))
         edit_row("data.csv", $_POST["edit"], $_POST["new-row"]);
-    if (isset($_POST["sentiment"])) {
-            exec("python ../python/sentiment.py data.csv");
-    }
     $data_json = read_csv(
         "data.csv",
         $_POST["off-set"],
@@ -15,10 +12,48 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     header("Content-Type: application/json");
     echo $data_json;
 }
+function make_prediction($comment)
+{
+    $curl = curl_init();
+
+    curl_setopt_array(
+        $curl,
+        array(
+            CURLOPT_URL => "http://localhost:5000/predict",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($comment),
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json"
+            ),
+        )
+    );
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+
+    $prediction = json_decode($response, true);
+    return $prediction;
+}
+function process_request($data){
+    $arr = explode(',', $data);
+    $comment = $arr[count($arr) - 2];
+    $sentiment = make_prediction($comment);
+    $arr[count($arr) - 1] = $sentiment;
+    $data = implode(",", $arr);
+    return $data;
+}
 function edit_row($file_name, $id, $new_row)
 {
     if (!check_data($new_row))
         return;
+    $new_row= process_request($new_row);
     $file = fopen($file_name, "r");
     $tem_file = fopen("temp.csv", "a");
     while ($row = fgetcsv($file)) {

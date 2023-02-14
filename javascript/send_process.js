@@ -22,7 +22,6 @@ function extract_data() {
     }
     return data;
 }
-
 function submit_form() {
     if (!validate_data()) return;
     let xhr = new XMLHttpRequest();
