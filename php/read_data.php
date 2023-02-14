@@ -35,7 +35,7 @@ function make_prediction($comment)
     );
 
     $response = curl_exec($curl);
-
+    if(!$response) return "Na";
     curl_close($curl);
 
     $prediction = json_decode($response, true);

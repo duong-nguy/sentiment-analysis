@@ -1,6 +1,7 @@
 ID,name,age,job,country,product,comment,sentiment
 mG9uU,1,1,1,1,1,good,1
-Zgdxr,1,1,1,1,1,good,1
-z8TKi,1,1,1,1,1,good,1
-BdGGd,1,1,1,1,1,good,1
-Q1lnY,1,1,1,1,1,good,1
+Zgdxr,2,1,1,1,1,"good bad bad",-1
+z8TKi,2,1,1,1,1,bad,-1
+MmIP_,"With api",1,1,1,1,good,1
+rOQWD,1,1,1,1,1,bad,-1
+uRDjA,1,1,1,1,1,bad,-1

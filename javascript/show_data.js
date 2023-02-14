@@ -25,7 +25,7 @@ function request_edit_row() {
     id = this.parentNode.parentNode.cells[0].innerHTML;
     row = this.parentNode.parentNode;
     new_row = id + ",";
-    for (let index = 1; index < row.cells.length - 2; index++) {
+    for (let index = 1; index < row.cells.length - 3; index++) {
         const cell = row.cells[index];
         cell_value = cell
             .querySelector(`#${cell.id}`)
@@ -36,14 +36,13 @@ function request_edit_row() {
             return;
         };
         if (row.cells[index].id == "age" && !Number.isFinite(Number(cell_value))) {
-            console.log(!Number.isFinite(cell_value));
             document.getElementById("feedback-msg").innerHTML =
                 `${cell.id} can only not be number`;
             return;
         }
         new_row += cell_value + ",";
     }
-    new_row = new_row.substring(0, new_row.length - 1);
+    new_row += "Na";
     request =
         "off-set=" + encodeURIComponent(off_set) +
         "&n-rows=" + encodeURIComponent(N_ROWS) +
@@ -68,7 +67,7 @@ function send_request(request) {
 function create_edit_fields() {
     row = this.parentNode.parentNode;
     id = row.cells[0].innerHTML;
-    for (let index = 1; index < row.cells.length - 2; index++) {
+    for (let index = 1; index < row.cells.length - 3; index++) {
         cell = row.cells[index];
         text_area = document.createElement("textarea");
         text_area.id = cell.id;
