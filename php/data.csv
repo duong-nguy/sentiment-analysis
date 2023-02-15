@@ -1,7 +1,32 @@
 ID,name,age,job,country,product,comment,sentiment
-mG9uU,1,1,1,1,1,good,1
-Zgdxr,2,1,1,1,1,"good bad bad",-1
-z8TKi,2,1,1,1,1,bad,-1
-MmIP_,"With api",1,1,1,1,good,1
-rOQWD,1,1,1,1,1,bad,-1
-uRDjA,1,1,1,1,1,bad,-1
+ZkV52,Duong,24,student,poland,laptop,Come without battery,-1
+-eHON,Duong Nguy ,24,student,Poland,Battery,Have very long life time,1
+5Bc3u,Duong,24,student,poland,Comic,No English version,-1
+oQYBV,Duong,24,student,poland,When python server offline,The Sentiment is `Na`,Na
+ahWQ7,Dummy Data,1,Test,Test,Test,good,Na
+0Iaod,Dummy Data,1,Test,Test,Test,good,1
+D8gFU,Dummy Data,1,Test,Test,Test,good,1
+h4ihH,Dummy Data,1,Test,Test,Test,good,1
+Vpkns,Dummy Data,1,Test,Test,Test,good,1
+sYGHU,Dummy Data,1,Test,Test,Test,good,1
+-38UL,Dummy data,1,1,1,1,bad,-1
+dFdYR,Dummy data,1,1,1,1,bad,-1
+zdp7j,Dummy data,1,1,1,1,bad,-1
+t4dce,Dummy data,1,1,1,1,bad,-1
+UUVI8,Dummy data,1,1,1,1,bad,-1
+DbjPl,Dummy data,1,1,1,1,bad,-1
+CkaiS,Dummy data,1,1,1,1,bad,-1
+zB0Im,Dummy data,1,1,1,1,bad,-1
+2jNTy,Dummy data,1,1,1,1,bad,-1
+KCbO-,Dummy data,1,1,1,1,bad,-1
+l0ogh,Dummy data,1,1,1,1,bad,-1
+EiOeg,Dummy data,1,1,1,1,bad,-1
+XNDty,Dummy data,1,1,1,1,bad,-1
+nHqfs,Dummy data,1,1,1,1,bad,-1
+sewjp,Dummy data,1,1,1,1,bad,-1
+Hpu8T,Dummy data,1,1,1,1,bad,-1
+hpfUQ,Dummy data,1,1,1,1,bad,-1
+whKuc,Dummy data,1,1,1,1,bad,-1
+SlJmP,Dummy data,1,1,1,1,bad,-1
+ov3WX,Dummy data,1,1,1,1,bad,-1
+DuIVo,Dummy Data,1,1,1,1,yeaaa,1

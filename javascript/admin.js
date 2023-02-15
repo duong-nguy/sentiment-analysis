@@ -97,7 +97,10 @@ function end_of_file(responseText) {
 }
 function create_table(responseText) {
     document.getElementById("feedback-msg").innerHTML = "";
-    if (end_of_file(responseText)) return;
+    if (end_of_file(responseText)) {
+        request_data();
+        return;
+    }
     data = JSON.parse(responseText);
     table = document.getElementById("table");
     table.innerHTML = "";
